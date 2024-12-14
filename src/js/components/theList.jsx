@@ -1,43 +1,45 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const TheList = () => {
-  const [todos, setTodos] = useState({
+  
+  const [newTodo, setNewTodo] = useState({
     newTask: "",
     is_done: false,
-  });
-
-  // const handleChange = (e) => {
-  //   setTodos({
-  //     ...todos,
-  //     newTask: e.target.value,
-  //   });
-  // };
+  })
+    
+  const [todos, setTodos] = useState([]);
+ 
  
   const handleKeyDown = (event) => {
-    console.log('Enter key pressed:', value);
-    if (event.key === 'Enter') {(e) =>
-      setTodos({
-        ...todos,
-        newTask: e.target.value,
-      });
-      console.log('Enter key pressed:', value);
+    console.log('Enter key pressed:', event.key,newTodo);
+    if (event.key === 'Enter') {
+      setTodos([...todos,newTodo]);
+      setNewTodo({newTask: ""});
     }
+
   };
 
+  useEffect(()=>{
+    console.log(todos.length);
+    console.log(todos);
+
+  },[todos])
+
   return (
-    <ul>
+    <>
       <input
         type="text"
-        //onChange={(e) => setTodos({newTask: e.target.value})} 
-        onKeyDown={handleKeyDown} 
-        //value={todos.newTask}
+        onKeyUp={(ev) => handleKeyDown(ev)} 
+        value={newTodo.newTask}
+        onChange={(ev) => setNewTodo({newTask: ev.target.value, is_done: false})}
         id="newTask"
         name="newTask"
-        defaultValue=""
         placeholder="What needs to be done?"
       />
-      <li>{todos.newTask}</li>
-    </ul>
+      <ul>
+        <li>{newTodo.newTask}</li>
+      </ul>
+    </>
   );
 };
 
