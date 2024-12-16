@@ -12,6 +12,14 @@
 
 ul {
     list-style-type: none;
+    margin: auto;
+    padding: 2rem;
+    background-color: aliceblue;
+}
+
+li {
+    display: flex;
+    justify-content: space-between;
 }
 
 .mainPage {
@@ -35,3 +43,25 @@ ul {
     text-align: center;
 }
 
+.delete {
+    /* display: none; */
+    /* text-align: right; */
+    /* top: 0;
+    right: 10px;
+    bottom: 0; */
+    /* width: 40px;
+    height: 40px; */
+    /* margin: auto 0; */
+    /* font-size: 30px; */
+    background-color: transparent;
+    color: #cc9a9a;
+    border: none;
+    margin-bottom: 0.5rem;
+    transition: color 0.5s ease-out;
+    &:hover {
+        color: #af5b5e;
+    }
+    &:after {
+        content: 'X';
+      }
+}

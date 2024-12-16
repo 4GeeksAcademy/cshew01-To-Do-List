@@ -5,6 +5,7 @@ const TheList = () => {
   const [newTodo, setNewTodo] = useState({
     newTask: "",
     is_done: false,
+    id: null,
   })
     
   const [todos, setTodos] = useState([]);
@@ -25,19 +26,28 @@ const TheList = () => {
 
   },[todos])
 
+  const removeTask = (taskId) => {
+    setTodos(todos.filter(task => task.id !== taskId));
+  }
+
   return (
     <>
       <input
         type="text"
         onKeyUp={(ev) => handleKeyDown(ev)} 
         value={newTodo.newTask}
-        onChange={(ev) => setNewTodo({newTask: ev.target.value, is_done: false})}
+        onChange={(ev) => setNewTodo({newTask: ev.target.value, is_done: false, id: Math.random()*10})}
         id="newTask"
         name="newTask"
         placeholder="What needs to be done?"
       />
       <ul>
-        <li>{newTodo.newTask}</li>
+      {todos.map(task => (
+              <li key={task.id}>
+                {task.newTask}
+                <button className="delete" onClick={() => removeTask(task.id)}></button>
+              </li>
+      ))}        
       </ul>
     </>
   );
