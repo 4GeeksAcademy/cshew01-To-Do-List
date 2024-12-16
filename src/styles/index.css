@@ -15,11 +15,16 @@ ul {
     margin: auto;
     padding: 2rem;
     background-color: aliceblue;
+    border: lightslategray, solid, 1px;
+    box-shadow: 2px 2px 5px lightslategray;
 }
 
 li {
     display: flex;
     justify-content: space-between;
+    border-bottom-color: lightblue;
+    border-bottom-style: solid;
+    border-width: 1px;
 }
 
 .mainPage {
@@ -34,6 +39,12 @@ li {
     color:rgb(237, 205, 165)
 }
 
+.newTask {
+    margin: 1rem;
+    width: 20rem;
+    
+}
+
 .listContainer {
     width: 30rem;
     padding: 2rem;
@@ -44,15 +55,6 @@ li {
 }
 
 .delete {
-    /* display: none; */
-    /* text-align: right; */
-    /* top: 0;
-    right: 10px;
-    bottom: 0; */
-    /* width: 40px;
-    height: 40px; */
-    /* margin: auto 0; */
-    /* font-size: 30px; */
     background-color: transparent;
     color: #cc9a9a;
     border: none;
@@ -64,4 +66,33 @@ li {
     &:after {
         content: 'X';
       }
+}
+
+.basePageOne {
+    margin: auto;
+    height: 3px;
+    width: 25.5rem;
+    background-color: aliceblue;
+    border: lightslategray, solid, 1px;
+    border-top: none;
+    box-shadow: 2px 2px 5px lightslategray;
+}
+
+.basePageTwo {
+    margin: auto;
+    height: 3px;
+    width: 25rem;
+    background-color: aliceblue;
+    border: lightslategray, solid, 1px;
+    border-top: none;
+    box-shadow: 2px 2px 5px lightslategray;
+}
+
+.footerText {
+    text-align: left;
+    color: lightblue;
+    vertical-align: text-bottom;
+    font-size: smaller;
+    height: 1rem;
+    line-height: 4rem;
 }

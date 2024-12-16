@@ -34,11 +34,12 @@ const TheList = () => {
     <>
       <input
         type="text"
+        autoFocus={true}
         onKeyUp={(ev) => handleKeyDown(ev)} 
         value={newTodo.newTask}
         onChange={(ev) => setNewTodo({newTask: ev.target.value, is_done: false, id: Math.random()*10})}
         id="newTask"
-        name="newTask"
+        className="newTask"
         placeholder="What needs to be done?"
       />
       <ul>
@@ -47,8 +48,12 @@ const TheList = () => {
                 {task.newTask}
                 <button className="delete" onClick={() => removeTask(task.id)}></button>
               </li>
-      ))}        
+      ))} 
+      <div className="footerText">{todos.length} {(todos.length === 1) ? "item left" : "items left"}</div>       
       </ul>
+      <div className="basePageOne"></div>
+      <div className="basePageTwo"></div>	
+      <div className="basePageThree"></div>		
     </>
   );
 };

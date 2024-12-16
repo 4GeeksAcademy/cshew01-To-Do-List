@@ -11,7 +11,7 @@ const Home = () => {
 			<p className="heading text-center">todos</p>
 			<div className="listContainer">
 				<TheList />
-			</div>			
+			</div>					
 		</div>
 	);
 };
