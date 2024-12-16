@@ -13,7 +13,7 @@ const TheList = () => {
  
   const handleKeyDown = (event) => {
     console.log('Enter key pressed:', event.key,newTodo);
-    if (event.key === 'Enter') {
+    if (event.key === 'Enter' && newTodo.newTask !== "") {
       setTodos([...todos,newTodo]);
       setNewTodo({newTask: ""});
     }
