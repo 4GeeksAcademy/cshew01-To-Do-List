@@ -25,6 +25,7 @@ li {
     border-bottom-color: lightblue;
     border-bottom-style: solid;
     border-width: 1px;
+    padding-top: 6px;
 }
 
 .mainPage {
@@ -34,9 +35,10 @@ li {
 }
 
 .heading {
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: 'alumni sans pinstripe'; 
     font-size: 10rem;
-    color:rgb(237, 205, 165)
+    color:rgb(237, 205, 165);
+    margin: 0;
 }
 
 .newTask {

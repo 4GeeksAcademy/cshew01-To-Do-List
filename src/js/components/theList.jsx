@@ -1,29 +1,32 @@
 import React, { useEffect, useState } from "react";
 
 const TheList = () => {
-  
+
   const [newTodo, setNewTodo] = useState({
-    newTask: "",
+    label: "",
     is_done: false,
     id: null,
   })
     
   const [todos, setTodos] = useState([]);
- 
- 
+
+  useEffect(() => {
+    fetch("https://playground.4geeks.com/todo/users/cshew01")
+    .then((resp) => resp.json())
+    .then((data) => setTodos(data.todos))
+  }, []);
+  
   const handleKeyDown = (event) => {
     console.log('Enter key pressed:', event.key,newTodo);
-    if (event.key === 'Enter' && newTodo.newTask !== "") {
+    if (event.key === 'Enter' && newTodo.label !== "") {
       setTodos([...todos,newTodo]);
-      setNewTodo({newTask: ""});
+      setNewTodo({label: ""});
     }
-
   };
 
   useEffect(()=>{
     console.log(todos.length);
     console.log(todos);
-
   },[todos])
 
   const removeTask = (taskId) => {
@@ -36,16 +39,16 @@ const TheList = () => {
         type="text"
         autoFocus={true}
         onKeyUp={(ev) => handleKeyDown(ev)} 
-        value={newTodo.newTask}
-        onChange={(ev) => setNewTodo({newTask: ev.target.value, is_done: false, id: Math.random()*10})}
-        id="newTask"
+        value={newTodo.label}
+        onChange={(ev) => setNewTodo({label: ev.target.value, is_done: false, id: Math.random()*10})}
+        id="label"
         className="newTask"
         placeholder="What needs to be done?"
       />
       <ul>
       {todos.map(task => (
               <li key={task.id}>
-                {task.newTask}
+                {task.label}
                 <button className="delete" onClick={() => removeTask(task.id)}></button>
               </li>
       ))} 
