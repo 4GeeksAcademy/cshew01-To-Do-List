@@ -10,25 +10,61 @@ const TheList = () => {
     
   const [todos, setTodos] = useState([]);
 
+
+  // checks for the API URL.  If it doesnt exist it will throw an error and create one.
+  // If it does exist it will read the data from the API
   useEffect(() => {
     fetch("https://playground.4geeks.com/todo/users/cshew01")
-    .then((resp) => resp.json())
-    .then((data) => setTodos(data.todos))
+    .then((resp) => {
+      if (!resp.ok) {
+        throw Error("User doesn't exist");
+      }
+      
+      resp.json().then((data) => setTodos(data.todos));
+    })
+    .catch((err) => {
+      console.error(err);
+      fetch("https://playground.4geeks.com/todo/users/cshew01", {
+        method: "POST"
+      });
+    });    
+    // .then((resp) => resp.json())
+    // .then((data) => setTodos(data.todos))
   }, []);
   
+
+  // Writes new todos to the API
+  const createTodo = async (newTodo) => {
+    const resp = await fetch("https://playground.4geeks.com/todo/todos/cshew01", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newTodo),
+    });
+    const data = await resp.json();
+    setTodos([...todos, newTodo]);
+  }
+
+
+  // function that listens for the enter key and updates the screen as well as
+ // calls the function (createTodo) that writes to the API
   const handleKeyDown = (event) => {
     console.log('Enter key pressed:', event.key,newTodo);
     if (event.key === 'Enter' && newTodo.label !== "") {
       setTodos([...todos,newTodo]);
+      createTodo(newTodo);
       setNewTodo({label: ""});
     }
   };
 
-  useEffect(()=>{
-    console.log(todos.length);
-    console.log(todos);
-  },[todos])
+  // useEffect(()=>{
+  //   console.log(todos.length);
+  //   console.log(todos);
+  // },[todos])
 
+
+  //Need to update the below code to remove from the API as well
   const removeTask = (taskId) => {
     setTodos(todos.filter(task => task.id !== taskId));
   }
@@ -40,7 +76,7 @@ const TheList = () => {
         autoFocus={true}
         onKeyUp={(ev) => handleKeyDown(ev)} 
         value={newTodo.label}
-        onChange={(ev) => setNewTodo({label: ev.target.value, is_done: false, id: Math.random()*10})}
+        onChange={(ev) => setNewTodo({label: ev.target.value, is_done: false})}
         id="label"
         className="newTask"
         placeholder="What needs to be done?"
