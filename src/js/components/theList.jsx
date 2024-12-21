@@ -28,6 +28,7 @@ const TheList = () => {
         method: "POST"
       });
     });    
+    // The below lines were used before adding the error handler above
     // .then((resp) => resp.json())
     // .then((data) => setTodos(data.todos))
   }, []);
@@ -43,7 +44,18 @@ const TheList = () => {
       body: JSON.stringify(newTodo),
     });
     const data = await resp.json();
-    setTodos([...todos, newTodo]);
+    console.log(data,newTodo);
+    setTodos([...todos, data]);
+  }
+
+  // Remove todos
+  const removeTodo = async (id) => {
+    const resp = await fetch(`https://playground.4geeks.com/todo/todos/${id}`, {
+      method: "DELETE",
+    });
+    setTodos(todos.filter(task => task.id !== id));
+    // const data = await resp.json();
+    // setTodos([...todos, newTodo]);
   }
 
 
@@ -57,17 +69,6 @@ const TheList = () => {
       setNewTodo({label: ""});
     }
   };
-
-  // useEffect(()=>{
-  //   console.log(todos.length);
-  //   console.log(todos);
-  // },[todos])
-
-
-  //Need to update the below code to remove from the API as well
-  const removeTask = (taskId) => {
-    setTodos(todos.filter(task => task.id !== taskId));
-  }
 
   return (
     <>
@@ -85,7 +86,7 @@ const TheList = () => {
       {todos.map(task => (
               <li key={task.id}>
                 {task.label}
-                <button className="delete" onClick={() => removeTask(task.id)}></button>
+                <button className="delete" onClick={() => removeTodo(task.id)}></button>
               </li>
       ))} 
       <div className="footerText">{todos.length} {(todos.length === 1) ? "item left" : "items left"}</div>       
